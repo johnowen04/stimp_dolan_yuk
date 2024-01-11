@@ -5,7 +5,7 @@ import ValidationComponent from 'react-native-form-validator';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default class Login extends React.Component {
+export default class Login extends ValidationComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,10 +32,23 @@ export default class Login extends React.Component {
                 <View style={styles.viewRow}>
                     <Button style={styles.button} title="Register" onPress={() => this.props.navigation.navigate("Register")} />
                     <View style={styles.space} />
-                    <Button style={styles.button} title="Login" onPress={() => this.doLogin(this.state.email, this.state.password)} />
+                    <Button style={styles.button} title="Login" onPress={() => _onSubmit()} />
                 </View>
+
+                <Text>
+                    {this.getErrorMessages()}
+                </Text>
             </Card>
         );
+    }
+
+    _onSubmit() {
+        if (this.validate({
+            email: { email: true },
+            password: { required: true },
+        })) {
+            this.doLogin(this.state.email, this.state.password);
+        }
     }
 
     doLogin = async (email, password) => {
@@ -56,9 +69,9 @@ export default class Login extends React.Component {
             var photo_url = await json.data.photo_url ? json.data.photo_url : 'https://ubaya.me/flutter/160420016/dolan_yuk/assets/img/default.jpg';
 
             try {
+                await AsyncStorage.setItem('email', email);
                 await AsyncStorage.setItem('fullName', full_name);
                 await AsyncStorage.setItem('photoUrl', photo_url);
-                await AsyncStorage.setItem('email', email);
                 alert('Login berhasil');
                 NativeModules.DevSettings.reload();
             } catch (e) {

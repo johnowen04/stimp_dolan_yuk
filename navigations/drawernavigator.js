@@ -34,8 +34,8 @@ function CustomDrawerContent(props) {
 
 const DrawerNavigator = () => {
     return (
-        <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />} initialRouteName="Jadwal">
-            <Drawer.Screen name="Main" component={BottomTabNavigator}
+        <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />} initialRouteName="Main">
+            <Drawer.Screen name="Utama" component={BottomTabNavigator}
                 options={{
                     drawerLabel: 'Jadwal',
                     title: '',

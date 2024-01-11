@@ -6,12 +6,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Jadwal from "../screens/jadwal";
 import CariJadwal from "../screens/carijadwal";
 import Profil from "../screens/profil";
+import MainStackNavigator from "./stacknavigator";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
     return (
-        <Tab.Navigator 
+        <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
                     var iconName;
@@ -32,7 +33,7 @@ const BottomTabNavigator = () => {
                 tabBarActiveTintColor: 'blue',
                 tabBarInactiveTintColor: 'gray',
             })}>
-            <Tab.Screen name="Jadwal" component={Jadwal}
+            <Tab.Screen name="Jadwal" component={MainStackNavigator}
                 options={{ headerShown: false }} />
             <Tab.Screen name="Cari Jadwal" component={CariJadwal}
                 options={{ headerShown: false }} />
