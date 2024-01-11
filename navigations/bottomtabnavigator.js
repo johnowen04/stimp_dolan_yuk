@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Jadwal from "../screens/jadwal";
 import CariJadwal from "../screens/carijadwal";
 import Profil from "../screens/profil";
 import MainStackNavigator from "./stacknavigator";
