@@ -32,7 +32,7 @@ export default class Login extends ValidationComponent {
                 <View style={styles.viewRow}>
                     <Button style={styles.button} title="Register" onPress={() => this.props.navigation.navigate("Register")} />
                     <View style={styles.space} />
-                    <Button style={styles.button} title="Login" onPress={() => _onSubmit()} />
+                    <Button style={styles.button} title="Login" onPress={() => this._onSubmit()} />
                 </View>
 
                 <Text>

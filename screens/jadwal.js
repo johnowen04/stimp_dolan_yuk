@@ -33,6 +33,10 @@ export default class Jadwal extends React.Component {
             // error reading value
         }
     }
+    
+    componentDidMount() {
+        this.fetchData();
+    }
 
     fetchData = () => {
         const options = {

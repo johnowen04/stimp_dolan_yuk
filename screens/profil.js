@@ -86,6 +86,12 @@ export default class Profil extends ValidationComponent {
                 </View>
                 <View style={styles.space} />
                 <View style={styles.viewRow}>
+                    <Text>Photo Url </Text>
+                    <TextInput style={styles.input} value={this.state.photoUrl}
+                        onChangeText={(photoUrl) => this.setState({ photoUrl })} />
+                </View>
+                <View style={styles.space} />
+                <View style={styles.viewRow}>
                     <Button style={styles.button} title="Update" onPress={() => this._onSubmit()} />
                 </View>
             </View >
@@ -96,18 +102,19 @@ export default class Profil extends ValidationComponent {
         if (this.validate({
             fullName: { required: true },
             email: { email: true },
+            photoUrl: { url: true },
         })) {
-            this.doUpdate(this.state.email, this.state.fullName);
+            this.doUpdate(this.state.email, this.state.fullName, this.state.photoUrl);
         }
     }
 
-    doUpdate = async (email, fullName) => {
+    doUpdate = async (email, fullName, photoUrl) => {
         const options = {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded'
             }),
-            body: "email=" + email + "&full_name=" + fullName
+            body: "email=" + email + "&full_name=" + fullName + "&photo_url=" + photoUrl
         };
 
         const response = await fetch('https://ubaya.me/flutter/160420016/dolan_yuk/updateprofile.php',
