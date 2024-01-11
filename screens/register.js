@@ -3,8 +3,6 @@ import { Card } from '@rneui/themed';
 import { StyleSheet, View, Text, TextInput, Button, NativeModules } from "react-native";
 import ValidationComponent from 'react-native-form-validator';
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 export default class Register extends ValidationComponent {
     constructor(props) {
         super(props);

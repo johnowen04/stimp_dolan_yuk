@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from '@rneui/themed';
 import { StyleSheet, View, Text, TextInput, Button, NativeModules } from "react-native";
+import ValidationComponent from 'react-native-form-validator';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -51,8 +52,12 @@ export default class Login extends React.Component {
         const json = await response.json();
 
         if (json.result == 'success') {
+            var full_name = await json.data.full_name;
+            var photo_url = await json.data.photo_url ? json.data.photo_url : 'https://ubaya.me/flutter/160420016/dolan_yuk/assets/img/default.jpg';
 
             try {
+                await AsyncStorage.setItem('fullName', full_name);
+                await AsyncStorage.setItem('photoUrl', photo_url);
                 await AsyncStorage.setItem('email', email);
                 alert('Login berhasil');
                 NativeModules.DevSettings.reload();
@@ -85,7 +90,7 @@ const styles = StyleSheet.create({
         margin: 3
     },
     space: {
-        width: 20, // or whatever size you need
+        width: 20,
         height: 20,
     },
 })
