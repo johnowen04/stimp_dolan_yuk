@@ -44,13 +44,16 @@ export default class Register extends ValidationComponent {
                 <View style={styles.viewRow}>
                     <Button style={styles.button} title="Register" onPress={() => this._onSubmit()} />
                 </View>
+                <Text>
+                    {this.getErrorMessages()}
+                </Text>
             </Card>
         );
     }
 
     _onSubmit() {
         if (this.validate({
-            fullName: { minlength: 3, maxlength: 7, required: true },
+            fullName: { required: true },
             email: { email: true },
             password: { required: true, equalPassword: this.state.repeatPassword },
         })) {
@@ -64,7 +67,7 @@ export default class Register extends ValidationComponent {
             headers: new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded'
             }),
-            body: "email=" + email + "&password=" + password + "&fullName=" + fullName
+            body: "email=" + email + "&password=" + password + "&full_name=" + fullName
         };
 
         const response = await fetch('https://ubaya.me/flutter/160420016/dolan_yuk/signup.php',
@@ -74,9 +77,8 @@ export default class Register extends ValidationComponent {
         if (json.result == 'success') {
 
             try {
-                await AsyncStorage.setItem('email', email);
                 alert('Daftar berhasil');
-                NativeModules.DevSettings.reload();
+                this.props.navigation.navigate('Login');
             } catch (e) {
                 alert(e);
             }
