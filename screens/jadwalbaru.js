@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, Button, Text, View, TextInput } from "react-native";
+import { StyleSheet, Button, Text, View, TextInput, NativeModules } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker"
 import DropDownPicker from 'react-native-dropdown-picker';
 import ValidationComponent from 'react-native-form-validator';
@@ -146,7 +146,8 @@ export default class JadwalBaru extends ValidationComponent {
 
             try {
                 alert('Jadwal berhasil dibuat');
-                this.props.navigation.navigate("Main    ");
+                this.props.navigation.navigate("Main");
+                NativeModules.DevSettings.reload();
             } catch (e) {
                 alert(e);
             }
